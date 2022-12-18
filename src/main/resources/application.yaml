@@ -1,0 +1,33 @@
+server:
+  port: 9081
+
+spring:
+  kafka:
+    bootstrap-servers: "http://X.X.X.X:9092"
+    producer:
+      keySerializer: "org.apache.kafka.common.serialization.StringSerializer"
+      valueSerializer: "io.confluent.kafka.serializers.KafkaAvroSerializer"
+      properties:
+        schema:
+          registry:
+            url: "http://X.X.X.X:8081"
+    consumer:
+      group-id: "spring-boot-avro-consumer-id"
+      keyDeserializer: "org.apache.kafka.common.serialization.StringDeserializer"
+      valueDeserializer: "io.confluent.kafka.serializers.KafkaAvroDeserializer"
+      autoOffsetReset: "earliest"
+      properties:
+        schema:
+          registry:
+            url: "http://X.X.X.X:8081"
+        specific:
+          avro:
+            reader: "true"
+
+
+
+avro:
+  topic:
+    name: "nayab-test"
+
+
